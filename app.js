@@ -47,6 +47,38 @@
     // Create Human Object
 
     // Use IIFE to get human data from form
+    const human = (function getHumanData() {
+
+       let name = document.getElementById('name').value;
+       let feet = document.getElementById('feet').value;
+       let inches = document.getElementById('inches').value;
+       let weight = document.getElementById('weight').value;
+       let diet = document.getElementById('diet').value;
+
+       function getName(){
+         return name;
+       }
+
+       function getHeight(){
+         return
+       }
+
+       function getWeight(){
+         return weight;
+       }
+
+       function getDiet() {
+         return diet;
+       }
+
+       return {
+         name: getName,
+         height: getHeight,
+         weight: getWeight,
+         diet: getDiet
+       };
+
+    })();
 
 
     // Create Dino Compare Method 1
@@ -69,3 +101,7 @@
 
 
 // On button click, prepare and display infographic
+const button = document.getElementById('btn');
+btn.addEventListener('click', function(){
+
+})
