@@ -13,35 +13,38 @@
    // Create Dino Objects
 
    //Dino 1
-   const Triceratops = new Dinosaurs("Triceratops", 13000, 114, "herbavor", "North America",
+   const dino1 = new Dinosaurs("Triceratops", 13000, 114, "herbavor", "North America",
    "Late Cretaceous", "First discovered in 1889 by Othniel Charles Marsh");
 
    //Dino 2
-   const Tyrannosaurus = new Dinosaurs("Tyrannosaurus Rex", 11905, 144, "carnivor", "North America",
+   const dino2 = new Dinosaurs("Tyrannosaurus Rex", 11905, 144, "carnivor", "North America",
    "Late Cretaceous", "The largest known skull measures in at 5 feet long");
 
   //Dino 3
-  const Anklyosaurus = new Dinosaurs("Anklyosaurus", 10500, 55, "herbavor", "North America", "Late Cretaceous",
+  const dino3 = new Dinosaurs("Anklyosaurus", 10500, 55, "herbavor", "North America", "Late Cretaceous",
   "Anklyosaurus survived for approximately 135 million years");
 
   //Dino 4
-  const Brachiosaurus = new Dinosaurs("Brachiosaurus", 70000, 372, "herbavor", "North America", "Late Jurassic",
+  const dino4 = new Dinosaurs("Brachiosaurus", 70000, 372, "herbavor", "North America", "Late Jurassic",
    "An asteroid was named 9954 Brachiosaurus in 1991");
 
    //Dino 5
-   const Stegosaurus = new Dinosaurs("Stegosaurus", 11600, 79, "herbavor", "North America, Europe, Asia",
+   const dnino5 = new Dinosaurs("Stegosaurus", 11600, 79, "herbavor", "North America, Europe, Asia",
     "Late Jurasic to Early Cretaceous", "The Stegosaurus had between 17 and 22 seperate places and flat spines");
 
   //Dino 6
-  const Elasmosaurus = new Dinosaurs("Elasmosaurus", 16000, 59, "carnivor","North America", "Late Cretaceous",
+  const dino6 = new Dinosaurs("Elasmosaurus", 16000, 59, "carnivor","North America", "Late Cretaceous",
   "Elasmosaurus was a marine reptile first discovered in Kansas");
 
   //Dino 7
-  const Pteranodon = new Dinosaurs("Pteranodon", 44, 20, "carnivor", "North America", "Late Cretaceous",
+  const dino7 = new Dinosaurs("Pteranodon", 44, 20, "carnivor", "North America", "Late Cretaceous",
   "Actually a flying reptile, the Pteranodon is not a dinosaur");
 
   //Dino 8
-  const Pigeon = new Dinosaurs("Pigeon", 0.5, 9, "herbavor", "World Wide", "Holocene", "All birds are living dinosaurs")
+  const bird = new Dinosaurs("Pigeon", 0.5, 9, "herbavor", "World Wide", "Holocene", "All birds are living dinosaurs")
+
+  //Creating array of Dino Objects
+  const Dinos = [dino1, dino2, dino3, dino4, dino5, dino6, dino7, bird];
 
 
     // Create Human Object
@@ -60,7 +63,7 @@
        }
 
        function getHeight(){
-         return
+         return (feet * 5) + inches;
        }
 
        function getWeight(){
@@ -83,14 +86,42 @@
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches.
+    const compareHeight = function(dino, human){
+      if(dino.height < human.height){
+        return 'Can you believe you are ${human.height/dino.height} taller than ${dino.name}';
+      }
+      else if(dino.height > human.height && dino.height/human.height > 2){
+        const diff = dino.height - human.height
+        return 'Not Even Closer! ${dino.name} is ${diff} inches taller than you!';
+      }
+      else if(dino.height == human.height){
+        return 'Congratulations ${human.name}, You are the same height as the Dino ${dino.name}';
+      }else {
+        return 'Sorry Human ${human.name}! Dino ${dino.name} is taller than you by ${dino.height - human.height}';
+      }
+    }
 
 
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
+    const compareDiet = function(dino, human){
+      if(dino.diet === "Herbavor"){
+        return 'You can be friends ${human.name}, Dino ${dino.name} is Herbavor, He wont eat you ;)';
+      }
+      else if(dino.diet === human.diet){
+        return 'Be Careful of your food, You both seem to be ${dino.diet} :P';
+      }
+      else {
+        return 'Ahh!! Human ${human.name}, your diet dont match. You are ${human.diet} and Dino is ${dino.diet}';
+      }
+    }
 
 
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
+    const compareWeight = function(dino, human){
+      
+    }
 
 
     // Generate Tiles for each Dino in Array
