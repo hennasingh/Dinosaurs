@@ -92,12 +92,12 @@
       }
       else if(dino.height > human.height && dino.height/human.height > 2){
         const diff = dino.height - human.height
-        return 'Not Even Closer! ${dino.name} is ${diff} inches taller than you!';
+        return 'Not Even Closer! ${dino.species} is ${diff} inches taller than you!';
       }
       else if(dino.height == human.height){
-        return 'Congratulations ${human.name}, You are the same height as the Dino ${dino.name}';
+        return 'Congratulations ${human.name}, You are the same height as the Dino ${dino.species}';
       }else {
-        return 'Sorry Human ${human.name}! Dino ${dino.name} is taller than you by ${dino.height - human.height}';
+        return 'Sorry Human ${human.name}! Dino ${dino.species} is taller than you by ${dino.height - human.height}';
       }
     }
 
@@ -106,7 +106,7 @@
     // NOTE: Weight in JSON file is in lbs, height in inches.
     const compareDiet = function(dino, human){
       if(dino.diet === "Herbavor"){
-        return 'You can be friends ${human.name}, Dino ${dino.name} is Herbavor, He wont eat you ;)';
+        return 'You can be friends ${human.name}, Dino ${dino.species} is Herbavor, He wont eat you ;)';
       }
       else if(dino.diet === human.diet){
         return 'Be Careful of your food, You both seem to be ${dino.diet} :P';
@@ -120,7 +120,14 @@
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
     const compareWeight = function(dino, human){
-      
+      if(dino.weight < human.weight){
+        return 'You wont believe Human ${human.name}, You are heavier than dino ${dino.species} ;) by ${human.weight - dino.weight} pounds';
+      }
+      else if(dino.weight/human.weight >=100){
+        return 'No match! Sorry to say Human ${human.name}, Dino ${dino.species} weighs ${dino.weight/human.weight} times more';
+      }else {
+        return 'Dont Worry Human ${human.name}, You only need to weigh ${dino.weight - human.weight} lbs more to fight dino ${dino.species}'
+      }
     }
 
 
