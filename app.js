@@ -1,6 +1,6 @@
 
     // Create Dino Constructor
-    function Dinosaurs(species, weight, height,diet, where, when, fact ) {
+    function Dinosaurs(species, weight, height,diet, where, when, fact) {
       this.species = species;
       this.weight = weight;
       this.height = height;
@@ -8,6 +8,7 @@
       this.where = where;
       this.when = when;
       this.fact = fact;
+      this.image ="images/" + species.toLowerCase() + '.png';
     }
 
    // Create Dino Objects
@@ -29,7 +30,7 @@
    "An asteroid was named 9954 Brachiosaurus in 1991");
 
    //Dino 5
-   const dnino5 = new Dinosaurs("Stegosaurus", 11600, 79, "herbavor", "North America, Europe, Asia",
+   const dino5 = new Dinosaurs("Stegosaurus", 11600, 79, "herbavor", "North America, Europe, Asia",
     "Late Jurasic to Early Cretaceous", "The Stegosaurus had between 17 and 22 seperate places and flat spines");
 
   //Dino 6
@@ -47,19 +48,17 @@
   const Dinos = [dino1, dino2, dino3, dino4, dino5, dino6, dino7, bird];
 
 
-    // Create Human Object
-
     // Use IIFE to get human data from form
-    const human = (function getHumanData() {
+    const getHumanData = function () {
 
-       let name = document.getElementById('name').value;
+       let species = document.getElementById('name').value;
        let feet = document.getElementById('feet').value;
        let inches = document.getElementById('inches').value;
        let weight = document.getElementById('weight').value;
        let diet = document.getElementById('diet').value;
 
        function getName(){
-         return name;
+         return species;
        }
 
        function getHeight(){
@@ -73,15 +72,28 @@
        function getDiet() {
          return diet;
        }
+       function getImage() {
+         return  "images/human.png";
+       }
 
        return {
-         name: getName,
+         species: getName,
          height: getHeight,
          weight: getWeight,
-         diet: getDiet
+         diet: getDiet,
+         image: getImage
        };
 
-    })();
+    };
+      // Create Human Object
+     const Human = getHumanData();
+
+    function CreateHuman(human) {
+
+         Dinos.push(4, new Dinosaurs(Human.species, Human.weight, Human.height, Human.diet, "", ""));
+         console.log(Dinos);
+    }
+
 
 
     // Create Dino Compare Method 1
@@ -130,16 +142,55 @@
       }
     }
 
+   // Generate Tiles for each Dino in Array
 
-    // Generate Tiles for each Dino in Array
+    let htmlTiles= ''
+   const createTiles = function() {
 
-        // Add tiles to DOM
+     const grid = document.getElementById('grid')
+
+     Dinos.forEach((item, index) => {
+
+       htmlTiles+= `<div class ="grid-item">
+            <h3>${item.species}</h3>`
+
+            switch (index) {
+              case 0:
+                htmlTiles+= `<img src= "` + item.image + '/>';
+                htmlTiles+= `<h4>`+ compareDiet(item, Human) + `</h4>`
+                break;
+                case 1:
+                htmlTiles+= `<img src= "` + item.image + '/>';
+                htmlTiles+= `<h4>`+ compareHeight(item, Human) + `</h4>`
+                break;
+                case 2:
+                htmlTiles+= `<img src= "` + item.image + '/>';
+                htmlTiles+= `<h4>`+ compareWeight(item, Human) + `</h4>`
+                break;
+                case 4:
+                htmlTiles+= `<img src="images/human.png" />`;
+                htmlTiles+=`<h4></h4>`
+                 break;
+              default:
+              htmlTiles+= `<img src= "` + item.image + '/>';
+              htmlTiles+= `<h4>`+ item.fact + `</h4>`
+              }
+   });
+   //Draw the Tiles on screen
+   grid.innerHtml = htmlTiles;
+ }
 
     // Remove form from screen
+    const humanForm = document.querySelector("#dino-compare");
+    function removeForm() {
+      humanForm.style.display = "none";
+    }
 
 
 // On button click, prepare and display infographic
 const button = document.getElementById('btn');
-btn.addEventListener('click', function(){
-
-})
+btn.addEventListener('click',function() {
+ CreateHuman(getHumanData());
+ createTiles();
+ removeForm();
+});
