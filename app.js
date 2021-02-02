@@ -175,6 +175,7 @@
               htmlTiles+= `<img src= "` + item.image + '/>';
               htmlTiles+= `<h4>`+ item.fact + `</h4>`
               }
+              htmlTiles+= `</div>`
    });
    //Draw the Tiles on screen
    grid.innerHtml = htmlTiles;
