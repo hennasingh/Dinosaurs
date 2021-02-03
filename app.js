@@ -8,7 +8,6 @@
       this.where = where;
       this.when = when;
       this.fact = fact;
-      this.image ="images/" + species.toLowerCase() + '.png';
     }
 
    // Create Dino Objects
@@ -44,8 +43,6 @@
   //Dino 8
   const bird = new Dinosaurs("Pigeon", 0.5, 9, "herbavor", "World Wide", "Holocene", "All birds are living dinosaurs")
 
-  //Creating array of Dino Objects
-  const Dinos = [dino1, dino2, dino3, dino4, dino5, dino6, dino7, bird];
 
 
     // Use IIFE to get human data from form
@@ -55,130 +52,98 @@
        let feet = document.getElementById('feet').value;
        let inches = document.getElementById('inches').value;
        let weight = document.getElementById('weight').value;
+       const height = feet*12+inches;
        let diet = document.getElementById('diet').value;
 
-       function getName(){
-         return species;
-       }
-
-       function getHeight(){
-         return (feet * 5) + inches;
-       }
-
-       function getWeight(){
-         return weight;
-       }
-
-       function getDiet() {
-         return diet;
-       }
-       function getImage() {
-         return  "images/human.png";
-       }
-
-       return {
-         species: getName,
-         height: getHeight,
-         weight: getWeight,
-         diet: getDiet,
-         image: getImage
-       };
+       let human = new Dinosaurs("human", weight,height, diet);
+       return human;
 
     };
-      // Create Human Object
-     const Human = getHumanData();
-
-    function CreateHuman(human) {
-
-         Dinos.push(4, new Dinosaurs(Human.species, Human.weight, Human.height, Human.diet, "", ""));
-         console.log(Dinos);
-    }
-
-
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches.
-    const compareHeight = function(dino, human){
-      if(dino.height < human.height){
-        return 'Can you believe you are ${human.height/dino.height} taller than ${dino.name}';
+    const compareHeight = function(dino, humanHeight){
+      if(dino.height < humanHeight){
+        return `Can you believe you are ${humanHeight/dino.height} taller than ${dino.name}`;
       }
-      else if(dino.height > human.height && dino.height/human.height > 2){
-        const diff = dino.height - human.height
-        return 'Not Even Closer! ${dino.species} is ${diff} inches taller than you!';
+      else if(dino.height > humanHeight && dino.height/humanHeight > 2){
+        const diff = dino.height - humanHeight
+        return `Not Even Closer! ${dino.species} is ${diff} inches taller than you!`;
       }
-      else if(dino.height == human.height){
-        return 'Congratulations ${human.name}, You are the same height as the Dino ${dino.species}';
+      else if(dino.height == humanHeight){
+        return `Congratulations Human, You are the same height as the Dino ${dino.species}`;
       }else {
-        return 'Sorry Human ${human.name}! Dino ${dino.species} is taller than you by ${dino.height - human.height}';
+        return `Sorry Human! Dino ${dino.species} is taller than you by ${dino.height - humanHeight}`;
       }
     }
 
 
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
-    const compareDiet = function(dino, human){
+     const compareDiet = function(dino, humanDiet){
       if(dino.diet === "Herbavor"){
-        return 'You can be friends ${human.name}, Dino ${dino.species} is Herbavor, He wont eat you ;)';
+        return `You can be friends Human, Dino ${dino.species} is Herbavor, He wont eat you ;)`;
       }
-      else if(dino.diet === human.diet){
-        return 'Be Careful of your food, You both seem to be ${dino.diet} :P';
+      else if(dino.diet === humanDiet){
+        return `Be Careful of your food, You both seem to be ${dino.diet} :P`;
       }
       else {
-        return 'Ahh!! Human ${human.name}, your diet dont match. You are ${human.diet} and Dino is ${dino.diet}';
+        return `Ahh!! Human, your diet don't match. You are ${humanDiet} and Dino is ${dino.diet}`;
       }
     }
 
 
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
-    const compareWeight = function(dino, human){
-      if(dino.weight < human.weight){
-        return 'You wont believe Human ${human.name}, You are heavier than dino ${dino.species} ;) by ${human.weight - dino.weight} pounds';
+    const compareWeight = function(dino, humanWeight){
+      if(dino.weight < humanWeight){
+        return `You wont believe Human, You are heavier than dino ${dino.species} ;) by ${humanWeight - dino.weight} pounds`;
       }
-      else if(dino.weight/human.weight >=100){
-        return 'No match! Sorry to say Human ${human.name}, Dino ${dino.species} weighs ${dino.weight/human.weight} times more';
+      else if(dino.weight/humanWeight >=100){
+        return `No match! Sorry to say Human ${human.name}, Dino ${dino.species} weighs ${dino.weight/human.weight} times more`;
       }else {
-        return 'Dont Worry Human ${human.name}, You only need to weigh ${dino.weight - human.weight} lbs more to fight dino ${dino.species}'
+        return `Dont Worry Human, You only need to weigh ${dino.weight - humanWeight} lbs more to fight dino ${dino.species}`;
       }
     }
 
    // Generate Tiles for each Dino in Array
+      const grid = document.getElementById('grid')
 
     let htmlTiles= ''
-   const createTiles = function() {
+   const createTiles = function(human_data) {
 
-     const grid = document.getElementById('grid')
+      dinos = [dino1, dino2, dino3, dino4, human_data, dino5, dino6, dino7, bird];
 
-     Dinos.forEach((item, index) => {
+     dinos.forEach((item, index) => {
 
        htmlTiles+= `<div class ="grid-item">
             <h3>${item.species}</h3>`
 
             switch (index) {
               case 0:
-                htmlTiles+= `<img src= "` + item.image + '/>';
-                htmlTiles+= `<h4>`+ compareDiet(item, Human) + `</h4>`
+                htmlTiles+= `<img src= "images/` + item.species.toLowerCase() + '.png"/>';
+                htmlTiles+= `<h4>`+ compareDiet(item, human_data.diet) + `</h4>`
                 break;
                 case 1:
-                htmlTiles+= `<img src= "` + item.image + '/>';
-                htmlTiles+= `<h4>`+ compareHeight(item, Human) + `</h4>`
+                htmlTiles+= `<img src= "images/` + item.species.toLowerCase() + '.png"/>';
+                htmlTiles+= `<h4>`+ compareHeight(item, human_data.height) + `</h4>`
                 break;
                 case 2:
-                htmlTiles+= `<img src= "` + item.image + '/>';
-                htmlTiles+= `<h4>`+ compareWeight(item, Human) + `</h4>`
+                htmlTiles+= `<img src= "images/` + item.species.toLowerCase() + '.png"/>';
+                htmlTiles+= `<h4>`+ compareWeight(item, human_data.weight) + `</h4>`
                 break;
                 case 4:
-                htmlTiles+= `<img src="images/human.png" />`;
+                htmlTiles+= `<img src= "images/` + item.species.toLowerCase() + '.png"/>';
                 htmlTiles+=`<h4></h4>`
                  break;
               default:
-              htmlTiles+= `<img src= "` + item.image + '/>';
+              htmlTiles+= `<img src= "images/` + item.species.toLowerCase() + '.png"/>';
               htmlTiles+= `<h4>`+ item.fact + `</h4>`
               }
               htmlTiles+= `</div>`
    });
    //Draw the Tiles on screen
-   grid.innerHtml = htmlTiles;
+   grid.insertAdjacentHTML('afterbegin', htmlTiles);
  }
 
     // Remove form from screen
@@ -190,8 +155,8 @@
 
 // On button click, prepare and display infographic
 const button = document.getElementById('btn');
-btn.addEventListener('click',function() {
- CreateHuman(getHumanData());
- createTiles();
+
+btn.addEventListener('click', function() {
+ createTiles(getHumanData());
  removeForm();
 });
