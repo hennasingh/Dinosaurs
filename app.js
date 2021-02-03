@@ -64,7 +64,7 @@
     // NOTE: Weight in JSON file is in lbs, height in inches.
     const compareHeight = function(dino, humanHeight){
       if(dino.height < humanHeight){
-        return `Can you believe you are ${humanHeight/dino.height} taller than ${dino.name}`;
+        return `Can you believe you are ${humanHeight/dino.height} taller than ${dino.species}`;
       }
       else if(dino.height > humanHeight && dino.height/humanHeight > 2){
         const diff = dino.height - humanHeight
