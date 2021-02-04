@@ -65,7 +65,7 @@
        const height = feet*12+inches;
        let diet = document.getElementById('diet').value;
 
-       let human = new Dinosaurs("human", weight,height, diet);
+       let human = new Dinosaurs(species, weight,height, diet);
        return human;
 
     };
@@ -127,9 +127,13 @@
     **/
    const createTiles = function(human_data) {
 
-      dinos = [dino1, dino2, dino3, dino4, human_data, dino5, dino6, dino7, bird];
+      dinos = [dino1, dino2, dino3, dino4, dino5, dino6, dino7, bird];
+     dinos.sort(() => Math.random() - 0.5);
 
-     dinos.forEach((item, index) => {
+     const randomDino = dinos.slice(0,4).concat(human_data).concat(dinos.slice(4,8));
+
+
+     randomDino.forEach((item, index) => {
 
        htmlTiles+= `<div class ="grid-item">
             <h3>${item.species}</h3>`
@@ -148,7 +152,7 @@
                 htmlTiles+= `<h4>`+ compareWeight(item, human_data.weight) + `</h4>`
                 break;
                 case 4:
-                htmlTiles+= `<img src= "images/` + item.species.toLowerCase() + '.png"/>';
+                htmlTiles+= `<img src= "images/human.png"/>`;
                 htmlTiles+=`<h4></h4>`
                  break;
               default:
