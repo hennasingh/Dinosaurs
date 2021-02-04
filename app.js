@@ -1,5 +1,15 @@
 
-    // Create Dino Constructor
+    /**
+    *@description Represent a Dinosaur Characteristics
+    *@Constructor
+    *@param {String}species - The name of the Dinosaur
+    *@param {Number} weight - The weight of Dinosaur
+    *@param {String} diet - The diet of Dinosaur
+    *@param {Number} height - The height of Dinosaur
+    *@param {String} where - The origin place
+    *@param {String} when - The time period of existence
+    *@param {String} fact - A random characteristic
+    **/
     function Dinosaurs(species, weight, height,diet, where, when, fact) {
       this.species = species;
       this.weight = weight;
@@ -45,7 +55,7 @@
 
 
 
-    // Use IIFE to get human data from form
+    // Function to get Human Data from the Form
     const getHumanData = function () {
 
        let species = document.getElementById('name').value;
@@ -107,9 +117,14 @@
     }
 
    // Generate Tiles for each Dino in Array
-      const grid = document.getElementById('grid')
+    const grid = document.getElementById('grid')
 
     let htmlTiles= ''
+
+    /**
+    *@description - Create Tiled for each of the Dinosaur Object
+    *@param {String} human_data - The Human Object created on form submission
+    **/
    const createTiles = function(human_data) {
 
       dinos = [dino1, dino2, dino3, dino4, human_data, dino5, dino6, dino7, bird];
