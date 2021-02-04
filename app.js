@@ -91,10 +91,10 @@
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
      const compareDiet = function(dino, humanDiet){
-      if(dino.diet === "Herbavor"){
+      if(dino.diet == "herbavor"){
         return `You can be friends Human, Dino ${dino.species} is Herbavor, He wont eat you ;)`;
       }
-      else if(dino.diet === humanDiet){
+      else if(dino.diet == humanDiet){
         return `Be Careful of your food, You both seem to be ${dino.diet} :P`;
       }
       else {
@@ -110,7 +110,7 @@
         return `You wont believe Human, You are heavier than dino ${dino.species} ;) by ${humanWeight - dino.weight} pounds`;
       }
       else if(dino.weight/humanWeight >=100){
-        return `No match! Sorry to say Human ${human.name}, Dino ${dino.species} weighs ${dino.weight/human.weight} times more`;
+        return `No match! Sorry to say Human, Dino ${dino.species} weighs ${dino.weight/humanWeight} times more`;
       }else {
         return `Dont Worry Human, You only need to weigh ${dino.weight - humanWeight} lbs more to fight dino ${dino.species}`;
       }
